@@ -23,8 +23,6 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia TODO el backend
 COPY app/ ./app/
-COPY alembic/ ./alembic/
-COPY alembic.ini .
 COPY static/ ./static/  # si tienes estáticos propios
 
 # 👇 IMPORTANTE: copia el build del frontend al sitio que tu app espera
