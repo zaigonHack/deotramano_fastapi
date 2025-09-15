@@ -1,0 +1,876 @@
+/* GLOBAL RESET + fondo claro uniforme */
+html, body, #root {
+  min-height: 100vh;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9 !important; /* <- fuerza el fondo claro SIEMPRE */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+/* NEW: asegurar box-sizing consistente en todos los elementos */
+*, *::before, *::after { box-sizing: border-box; }  /* NEW */
+
+body {
+  overflow-x: hidden;
+}
+
+/* CABECERA */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 160px;
+  width: 100%;
+  background-color: #1e1e1e; /* gris casi negro */
+  display: flex;
+  align-items: center;
+  padding: 0 2rem;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+.header-space {
+  height: 160px; /* espacio equivalente a la cabecera para evitar superposición */
+}
+
+input {
+  background-color: #fff;
+  color: #000;
+}
+
+.logo-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo-img {
+  height: 120px;
+  width: auto;
+}
+
+.logo-text {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #2d6aa6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* CONTENEDOR PRINCIPAL */
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: calc(100vh - 160px - 54px);
+  background: #f9f9f9;
+  padding: 2rem 0 70px 0;
+  width: 100vw;
+  box-sizing: border-box;
+}
+
+/* === CreateAd: centrado consistente (único bloque) === */
+:root {
+  --card-inner: 440px; /* ajusta 420–480 según gusto */
+}
+
+/* Cabecera dentro de la tarjeta */
+.form-container .back-btn,
+.form-container .form-title {
+  max-width: var(--card-inner);
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.form-container .back-btn {
+  position: relative;
+  display: block;
+  width: 100%;
+  text-align: center;        /* centra el texto */
+  margin-bottom: 1.2rem;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;       /* azul por defecto */
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.form-container .back-btn:hover {
+  background: #e0e4e9;       /* azul más oscuro al pasar ratón */
+}
+
+/* La flecha a la izquierda */
+.form-container .back-btn svg,
+.form-container .back-btn span:first-child {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* El formulario entero (columna centrada) */
+.form-container .register-form {
+  max-width: var(--card-inner);
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Controles ocupan 100% de esa columna */
+.form-container .register-form .form-input,
+.form-container .register-form textarea,
+.form-container .register-form .drop-area,
+.form-container .register-form .form-button {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Labels a la izquierda siempre */
+.form-container .register-form .form-label {
+  text-align: left !important;
+}
+
+/* Mensajes dentro de la misma columna */
+.form-container .success-message,
+.form-container .error-message {
+  max-width: var(--card-inner);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* En móviles: la tarjeta se hace casi a pantalla completa */
+@media (max-width: 480px) {
+  :root { --card-inner: 92vw; }
+}
+
+.form-container {
+  max-width: 440px;
+  margin: 48px auto 0 auto;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.10);
+  padding: 30px 30px 24px 30px;
+  border-radius: 12px;
+  text-align: center;
+  width: 100%;
+}
+
+.form-container input,
+.form-container button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.form-container button {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.form-label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #333;  /* Aseguramos que esté en negro */
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-align: left;  /* Alineación a la izquierda */
+}
+
+.forgot-password {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9em;
+}
+
+/*.link-button:hover {
+  color: #0056b3;
+}*/
+
+/* FORMULARIO */
+/*.register-form {
+  background-color: #fff; /* fondo blanco 
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+} */
+
+.register-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.register-form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #333;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.form-container input,
+.register-form input,
+.auth-form input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff; /* fondo claro */
+  color: #000; /* texto negro */
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.register-form button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #0077cc;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-form button:hover {
+  background-color: #005fa3;
+}
+ 
+/* Eliminar cualquier sombra previa y aplicar solo una sombra pequeña para el formulario de Iniciar sesión */
+.auth-form {
+  max-width: 350px; /* Reducir el tamaño de la caja */
+  margin: 2rem auto;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+/* Ajustes para los campos de usuario y contraseña */
+.auth-form input {
+  text-align: left; /* Asegura que el texto esté alineado a la izquierda */
+  background-color: #fff; /* Asegura que el fondo sea blanco */
+  color: #000; /* Texto negro para los campos */
+}
+
+/* Estilo de las etiquetas de usuario y contraseña */
+.auth-form label {
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+/* Botón de Iniciar sesión */
+.auth-form button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0077cc; /* Azul */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Efectos al pasar el ratón sobre el botón */
+.auth-form button:hover {
+  background-color: #005fa3;
+}
+
+.link-button {
+  background: none;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  text-decoration: underline;
+  font-size: 0.9em;
+}
+
+.link-button:hover {
+  color: #e3e8ec;
+}
+
+/* Estilo para los mensajes de éxito y error */
+.success-message {
+  color: green;
+  font-weight: bold;
+  text-align: center;  /* Alineación central */
+}
+
+.error-message {
+  color: red;
+  font-weight: bold;
+  text-align: center;  /* Alineación central */
+}
+
+/* FORMULARIO */
+.register-form {
+  background: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  padding: 0; /* O solo espacio entre campos */
+}
+
+.register-form h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: #0077cc;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.register-form label {
+  display: block;
+  margin-bottom: 0.3rem;
+  color: #333;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.register-form input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff; /* fondo claro */
+  color: #000; /* texto negro */
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.register-form button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: #0077cc;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.register-form button:hover {
+  background-color: #005fa3;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-right: 2rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #ebe6e6;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #007bff;
+}
+
+/* MENU TOGGLE (hamburguesa) */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* Estilo de los enlaces del menú */
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  margin-left: auto;
+}
+
+.form-title {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #0077cc;
+}
+
+/* Botón "Enviar enlace" con el mismo color y hover que el de Iniciar sesión */
+.form-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #0077cc; /* Azul igual al de Iniciar sesión */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+textarea.form-input {
+  width: 100%;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #000;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  min-height: 120px;
+  max-height: 250px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+/* Hover para el botón "Enviar enlace" */
+.form-button:hover {
+  background-color: #005fa3; /* Color más oscuro al pasar el ratón */
+}
+
+/* Forzar color negro en el texto de todos los campos con la clase form-input */
+.form-input {
+  color: #000 !important; /* Establecer el color del texto en negro */
+  background-color: #fff !important; /* Fondo blanco */
+}
+
+/* Para el autocompletado en Chrome/Safari */
+.form-input:-webkit-autofill {
+  color: #000 !important;  /* Forzar color negro cuando se autocompleta */
+  background-color: #fff !important; /* Fondo blanco */
+  -webkit-text-fill-color: #000 !important; /* Asegura que el texto esté en negro en Chrome */
+}
+
+/* Para el autocompletado cuando el campo está enfocado */
+.form-input:-webkit-autofill:focus {
+  color: #000 !important; /* Aseguramos que el texto sea negro cuando se selecciona el autocompletado */
+  background-color: #fff !important; /* Fondo blanco */
+  -webkit-text-fill-color: #000 !important; /* Asegura que el texto se mantenga negro en Chrome */
+}
+
+/* Placeholder del autocompletado */
+.form-input:-webkit-autofill::placeholder {
+  color: #000 !important;  /* Asegura que el texto del placeholder sea negro */
+}
+
+/* Para Firefox */
+.form-input:-moz-placeholder {
+  color: #000 !important;
+}
+
+/* Para Internet Explorer */
+.form-input:-ms-input-placeholder {
+  color: #000 !important;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    height: 120px;
+    padding: 1rem;
+  }
+
+  .header-space {
+    height: 120px;
+  }
+
+  .logo-img {
+    height: 60px;
+  }
+
+  .logo-text {
+    font-size: 2rem;
+  }
+}
+
+input,
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: #111 !important;
+  color: #111 !important;
+  background-color: #fff !important;
+  box-shadow: 0 0 0px 1000px #fff inset !important;
+  -webkit-box-shadow: 0 0 0px 1000px #fff inset !important;
+  transition: background-color 5000s ease-in-out 0s !important;
+}
+
+input:-webkit-autofill::first-line {
+  color: #111 !important;
+  -webkit-text-fill-color: #111 !important;
+}
+
+/* FOOTER MODERNO FIJO */
+.main-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  min-height: 54px;
+  background: #181818;
+  color: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 -3px 16px rgba(10,10,40,0.06);
+  z-index: 2000;
+  font-size: 1.05rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-sizing: border-box;
+}
+
+.footer-content {
+  padding: 10px 0;
+  width: 100%;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* Para que los formularios no tapen el footer en pantallas pequeñas */
+.form-wrapper {
+  padding-bottom: 70px !important; /* añade hueco para el footer */
+}
+
+/* Responsive para móviles */
+@media (max-width: 480px) {
+  .main-footer {
+    font-size: 0.93rem;
+    min-height: 42px;
+  }
+}
+
+/* Para móviles */
+@media (max-width: 480px) {
+  .form-container {
+    max-width: 96vw !important;
+    min-width: 0 !important;
+    padding: 16px 6px 18px 6px !important;
+    margin: 18px auto 0 auto !important;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+  }
+  .form-title {
+    font-size: 1.45rem;
+  }
+}
+
+/* Botones iguales en el dashboard */
+.dashboard-btn {
+  min-width: 220px !important;
+  max-width: 230px !important;
+  width: 100%;
+  padding: 12px 18px;
+  font-size: 1rem;
+  border-radius: 7px;
+  margin: 0 auto;
+  display: block;
+  box-sizing: border-box;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #007bff;
+  font-weight: 600;
+  font-size: 1.11rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 1.5rem;
+  transition: color 0.18s;
+  outline: none;
+  padding: 4px 12px 4px 2px;
+  border-radius: 7px;
+}
+.back-btn:hover,
+.back-btn:focus {
+  color: #004c94;
+  background: #f0f7ff;
+}
+
+/* === Thumbnails: botón "X" centrado (SVG) con giro en hover === */
+/* Botón X circular centrado */
+.img-thumb {
+  position: relative;
+  display: inline-block;
+}
+.img-thumb .img-x {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 50%;
+  display: flex;                 /* centra el SVG */
+  align-items: center;
+  justify-content: center;
+  background: #f44336;
+  color: #fff;                   /* el SVG usa currentColor */
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  box-shadow: 0 2px 8px rgba(0,0,0,.25);
+  transition: transform .12s ease, background .12s ease;
+}
+.img-thumb .img-x:hover { background: #d9362b; transform: scale(1.03); }
+.img-thumb .img-x:active { transform: scale(0.98); }
+.img-thumb .img-x svg { width: 14px; height: 14px; pointer-events: none; }
+
+/* Giro suave del icono al pasar el ratón */
+.spin-on-hover { transition: transform .18s ease; }
+.img-x:hover .spin-on-hover { transform: rotate(90deg); }
+
+/* === Barra de fuerza de contraseña === */
+.pw-meter-wrap { margin-top: 8px; }
+.pw-meter {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin: 6px 0;
+}
+.pw-bar {
+  height: 8px;
+  border-radius: 6px;
+  background: #e0e0e0;
+  transition: background .2s ease;
+}
+.pw-label {
+  font-size: .88rem;
+  margin-bottom: 6px;
+}
+
+.pw-checklist {
+  list-style: none;
+  padding-left: 0;
+  margin: 8px 0 0 0;
+  font-size: .88rem;
+  color: #546e7a;
+}
+.pw-checklist li {
+  margin: 2px 0;
+  position: relative;
+  padding-left: 20px;
+}
+.pw-checklist li::before {
+  content: "•";
+  position: absolute;
+  left: 6px;
+  top: 0;
+  color: #b0bec5;
+}
+.pw-checklist li.ok {
+  color: #2e7d32;
+}
+.pw-checklist li.ok::before {
+  content: "✔";
+  left: 2px;
+  color: #2e7d32;
+}
+
+.pw-ok-hint {
+  margin-top: 6px;
+  font-size: .85rem;
+  color: #2e7d32;
+}
+
+/* --- Mostrar contraseñas: fila en una línea --- */
+.showpw-row{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin:6px 0 0 0;
+  line-height:1;         /* alinea verticalmente el texto */
+}
+
+/* --- Checkbox cuadrado, fondo blanco y borde negro --- */
+input[type="checkbox"].checkbox-square{
+  width:18px;
+  height:18px;
+  border:2px solid #111;   /* borde negro */
+  border-radius:3px;       /* muy leve redondeo (cuadrado) */
+  background:#fff;         /* fondo blanco */
+  accent-color:#111;       /* color del check (FF/Chromium modernos) */
+  cursor:pointer;
+}
+.showpw-row label{ color:#203040; } /* texto legible en modo claro/oscuro */
+
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;   /* más grande */
+  height: 20px;
+  border: 2px solid #000; /* borde negro */
+  border-radius: 4px;
+  background: #fff;       /* fondo blanco */
+  cursor: pointer;
+  position: relative;
+}
+
+/* Cuando está marcado */
+input[type="checkbox"]:checked {
+  background: #fff;       /* mantiene blanco */
+  border-color: #000;     /* borde negro */
+}
+
+input[type="checkbox"]:checked::after {
+  content: "✔";
+  color: #000;        
+  font-size: 22px;       
+  position: absolute;
+  top: 50%;              /* centrado vertical */
+  left: 50%;             /* centrado horizontal */
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+}
+
+
+/* 2) Contenedor del menú desplegable / sheet */
+.menu-sheet {
+  position: fixed;
+  top: max(12px, env(safe-area-inset-top));
+  right: max(12px, env(safe-area-inset-right)); /* NEW: anclaje seguro */
+  z-index: 9999;
+  /* No permitir que se salga por los lados */
+  max-width: min(88vw, 420px);
+  width: max-content;
+  box-sizing: border-box;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.18);
+  background: #121212; /* o tu color */
+  padding: clamp(8px, 2vw, 14px);
+  /* NEW: nunca más ancho que la ventana menos 16px */
+  max-inline-size: calc(100vw - 16px); /* NEW */
+}
+
+/* 3) Items del menú */
+.menu-item {
+  display: block;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #fff; /* ajusta a tu tema */
+  padding: clamp(10px, 2.6vh, 14px) clamp(14px, 4vw, 18px);
+  font-size: clamp(14px, 2.8vw, 16px);
+  line-height: 1.2;
+  border-radius: 10px;
+  /* NEW: permitir romper palabras largas si hiciera falta */
+  overflow-wrap: anywhere; /* NEW */
+}
+
+.menu-item + .menu-item {
+  margin-top: 6px;
+}
+
+.menu-item--danger {
+  background: #d32f2f; /* rojo botón “Cerrar sesión” */
+  color: white;
+}
+
+/* Hover/active accesibles */
+.menu-item:active,
+.menu-item:focus-visible {
+  outline: 2px solid rgba(255,255,255,.2);
+  outline-offset: 2px;
+}
+
+/* 4) En pantallas MUY estrechas, forzamos a no salirse */
+@media (max-width: 360px) {
+  .menu-sheet {
+    right: 8px;
+    left: 8px;             /* si necesitas que ocupe todo el ancho disponible */
+    max-width: none;
+    width: auto;
+  }
+  .menu-item {
+    white-space: normal;   /* permite dos líneas si hace falta */
+  }
+}
+
+/* 5) Evitar zoom raro al enfocar inputs en iOS/Android */
+input, select, textarea {
+  font-size: 16px; /* mínimo para que algunos navegadores no “auto-zoomen” */
+}
+
+/* ===== Contact form responsive tweaks ===== */
+
+/* que todo ocupe el ancho disponible */
+.form,
+.form-input,
+.form-textarea,
+.form-button {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* el contenedor con respiro lateral en móviles */
+.form-container {
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+/* el panel blanco centrado y con ancho máximo cómodo en desktop */
+.form {
+  max-width: 560px;  /* ancho cómodo en pantallas grandes */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* textarea: sólo vertical y con min-altura razonable */
+.form-textarea {
+  min-height: 160px;
+  resize: vertical;
+}
+
+/* botón a una línea y fácil de pulsar en móvil */
+.form-button {
+  min-height: 42px;
+}
+
+/* en pantallas muy pequeñas, un pelín más de padding */
+@media (max-width: 380px) {
+  .form {
+    padding: 14px;
+  }
+}

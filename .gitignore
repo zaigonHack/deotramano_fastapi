@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*.sqlite3
+venv/
+.env
+
+# Node
+frontend/node_modules/
+frontend/.env
+
+# Build del frontend (NO lo subas si usas Docker/Railway)
+frontend/dist/
+
+# Editor/OS
+.DS_Store
+.idea/
+.vscode/
