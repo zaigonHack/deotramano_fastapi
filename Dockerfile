@@ -23,7 +23,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia TODO el backend
 COPY app/ ./app/
-COPY static/ ./static/  # si tienes estáticos propios
+COPY static/ ./static/
 
 # 👇 IMPORTANTE: copia el build del frontend al sitio que tu app espera
 COPY --from=frontend-build /app/frontend/dist ./frontend/dist
