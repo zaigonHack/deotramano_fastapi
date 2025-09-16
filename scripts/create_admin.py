@@ -10,7 +10,9 @@ load_dotenv()
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-from passlib.hash import bcrypt
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 from sqlalchemy.exc import IntegrityError
 
 from app.database import SessionLocal, Base, engine
@@ -35,7 +37,7 @@ def mask_url(url: str) -> str:
 
 
 def get_password_hash(password: str) -> str:
-    return bcrypt.hash(password)
+    return pwd_context.hash(password)
 
 
 def resolve_password_attr() -> str:
