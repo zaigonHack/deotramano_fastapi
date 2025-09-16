@@ -101,6 +101,10 @@ CSP_VALUE = _build_csp()
 # =========================================================
 #  App y DB
 # =========================================================
+# 👇 Importa los modelos ANTES de create_all para que se registren las tablas
+from app import models as _models  # noqa: F401
+
+# Crea tablas si no existen (usa la DB que marque DATABASE_URL)
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
